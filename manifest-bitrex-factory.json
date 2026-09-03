@@ -1,0 +1,17 @@
+{
+  "name": "BitRex Miner (4x BM1373) — Factory",
+  "version": "v1.1.0",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "bins-bitrex/bootloader.bin", "offset": 0 },
+        { "path": "bins-bitrex/partition-table.bin", "offset": 32768 },
+        { "path": "bins-bitrex/esp-miner.bin", "offset": 65536 },
+        { "path": "bins-bitrex/www.bin", "offset": 4259840 },
+        { "path": "bins-bitrex/ota_data_initial.bin", "offset": 15794144 }
+      ]
+    }
+  ]
+}

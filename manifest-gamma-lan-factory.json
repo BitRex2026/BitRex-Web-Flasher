@@ -1,0 +1,17 @@
+{
+  "name": "NerdOCTAXE-Gamma LGA rev2.2 + LAN — Factory",
+  "version": "v1.1.0",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "bins-gamma-lan/bootloader.bin", "offset": 0 },
+        { "path": "bins-gamma-lan/partition-table.bin", "offset": 32768 },
+        { "path": "bins-gamma-lan/esp-miner.bin", "offset": 65536 },
+        { "path": "bins-gamma-lan/www.bin", "offset": 4259840 },
+        { "path": "bins-gamma-lan/ota_data_initial.bin", "offset": 15794144 }
+      ]
+    }
+  ]
+}

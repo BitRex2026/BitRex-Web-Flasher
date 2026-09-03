@@ -1,0 +1,15 @@
+{
+  "name": "BitRex Miner (4x BM1373) — Update",
+  "version": "v1.1.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "bins-bitrex/esp-miner.bin", "offset": 65536 },
+        { "path": "bins-bitrex/www.bin", "offset": 4259840 },
+        { "path": "bins-bitrex/ota_data_initial.bin", "offset": 15794144 }
+      ]
+    }
+  ]
+}
