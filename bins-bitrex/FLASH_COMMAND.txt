@@ -1,0 +1,17 @@
+# BitRex firmware v1.1.0 (BitRex theme, Gamma color scheme) — ESP32-S3, 16MB flash
+# full flash (from this directory):
+esptool.py --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash \
+  --flash_mode dio --flash_size 16MB --flash_freq 80m \
+  0x0 bootloader.bin 0x8000 partition-table.bin 0x10000 esp-miner.bin \
+  0x410000 www.bin 0xf10000 ota_data_initial.bin
+#
+# firmware-only update (keeps settings/pools):
+esptool.py --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash \
+  0x10000 esp-miner.bin
+#
+# MD5:
+#  bootloader.bin        e40aac0cb9665cf4e095731f7ce1b772
+#  partition-table.bin   5564bf7cc6773a0af894079b83d28500
+#  esp-miner.bin         3d344c47b2358e49fa34d97c95742872
+#  www.bin               6f85a6be71aa7eab22d1624b22e6f854
+#  ota_data_initial.bin  84d04c9d6cc8ef35bf825d51a5277699
