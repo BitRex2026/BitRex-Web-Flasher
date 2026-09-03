@@ -1,0 +1,18 @@
+# NerdOCTAXE-Gamma + LAN-Adapter firmware (BOARD=NERDOCTAXEGAMMA, OCTAXE_LAN_REV22=1)
+# ESP32-S3, 16MB flash  — ONLY for LGA_Design-Rev-2.2 hardware!
+# (do NOT flash on rev3.x: GPIO2/12 drive the TMP451 mux there)
+#
+# full flash (from this directory):
+esptool.py --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash \
+  --flash_mode dio --flash_size 16MB --flash_freq 80m \
+  0x0 bootloader.bin 0x8000 partition-table.bin 0x10000 esp-miner.bin \
+  0x410000 www.bin 0xf10000 ota_data_initial.bin
+#
+# or single factory image:
+esptool.py --chip esp32s3 -b 460800 write_flash 0x0 esp-miner-factory-NerdOCTAXEGamma-LAN-v1.1.0.bin
+#
+# firmware-only update (keeps settings/pools):
+esptool.py --chip esp32s3 -b 460800 write_flash 0x10000 esp-miner.bin
+#
+# MD5: see MD5SUMS.txt
+# Built with ESP-IDF v5.3.3

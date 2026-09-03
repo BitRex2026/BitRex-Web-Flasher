@@ -1,0 +1,6 @@
+194d4319daae16ff7a1003d29db2a3c0  bootloader.bin
+998a79caa2cc9a64f95e5f1dc8ea17f0  esp-miner-factory-NerdOCTAXEGamma-LAN-v1.1.0.bin
+36de1b56fc4a82e4bb8aa516cbc29f34  esp-miner.bin
+84d04c9d6cc8ef35bf825d51a5277699  ota_data_initial.bin
+5564bf7cc6773a0af894079b83d28500  partition-table.bin
+538ba57b515e0be51593aeb4cb59bd0b  www.bin
