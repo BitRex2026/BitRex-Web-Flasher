@@ -1,4 +1,5 @@
-# NerdOCTAXE-Gamma + LAN-Adapter firmware (BOARD=NERDOCTAXEGAMMA, OCTAXE_LAN_REV22=1)
+# NerdOCTAXE-Gamma + LAN-Adapter firmware (BOARD=NERDOCTAXEGAMMA)
+# LAN patches: W5500 RST=GPIO3 / INT polling / forced TPS53647 / TMP451 probe-safe
 # ESP32-S3, 16MB flash  — ONLY for LGA_Design-Rev-2.2 hardware!
 # (do NOT flash on rev3.x: GPIO2/12 drive the TMP451 mux there)
 #
@@ -9,7 +10,7 @@ esptool.py --chip esp32s3 -b 460800 --before default_reset --after hard_reset wr
   0x410000 www.bin 0xf10000 ota_data_initial.bin
 #
 # or single factory image:
-esptool.py --chip esp32s3 -b 460800 write_flash 0x0 esp-miner-factory-NerdOCTAXEGamma-LAN-v1.1.0.bin
+esptool.py --chip esp32s3 -b 460800 write_flash 0x0 esp-miner-factory-NERDOCTAXEGAMMA-LAN.bin
 #
 # firmware-only update (keeps settings/pools):
 esptool.py --chip esp32s3 -b 460800 write_flash 0x10000 esp-miner.bin
