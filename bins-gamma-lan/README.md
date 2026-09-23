@@ -1,14 +1,13 @@
-# فریمور LAN v3 — NerdOCTAXE-Gamma (LGA_Design-Rev-2.2) + آداپتر BitRex (W5500)
+# فریمور LAN — نسخه 1.1.0 (auto-probe) — NerdOCTAXE-Gamma LGA_Design-Rev-2.2 + آداپتر BitRex
 
-پایه: shufps/ESP-Miner-NerdQAxePlus (762092d) — BOARD=NERDOCTAXEGAMMA — ESP-IDF v5.3.3
+Current Version: 1.1.0 — پایه shufps/ESP-Miner-NerdQAxePlus (762092d) — BOARD=NERDOCTAXEGAMMA
 
-## پین‌های W5500 (شماتیک LAN-Adapter)
-SCLK=GPIO2 · RST=GPIO3 · MOSI=GPIO12 · MISO=GPIO16 · CS=GPIO21 — INTn وصل نیست (polling)
+## جدید در این بیلد
+- **تشخیص خودکار سیم‌کشی**: هنگام بوت ۴ حالت (قطعیت RST × جابه‌جایی MOSI/MISO) امتحان و درست‌ترین انتخاب می‌شود؛ نتیجه هر امتحان در لاگ سریال ثبت می‌شود (`probe[...]: ver=0x..`)
+- رفع باگ ترتیب netif، غیرفعال‌سازی TMP451 MUX در حالت LAN، آیکون شبکه
 
-## تغییرات v3 (رفع خطای esp_eth_start: handle null)
-- رفع باگ ترتیب اجرا: ساخت netif/glue به بعد از esp_netif_init منتقل شد (دلیل اصلی کارنکردن اتریت)
-- غیرفعال‌سازی TMP451 MUX در حالت LAN (GPIO2/12 مشترک با SCLK/MOSI) — دمای ASIC از خود چیپ‌ها + TMP1075 + VR خوانده می‌شود
-- به‌علاوه پچ‌های قبلی: پین‌های W5500، اجبار TPS53647، محافظ MUX، تازه‌شدن آیکون شبکه
+## پین‌ها (طراحی آداپتر — تأیید شد)
+SCLK=GPIO2 · RST=GPIO3 · MOSI=GPIO12 · MISO=GPIO16 · CS=GPIO21 — ماژول W5500 با هدر 2×5 (SCLK GND / SCS INT / MOSI RST / MISO GND / 3.3V 5V)، تغذیه 5V
 
 ## فلش
 ```bash
@@ -18,10 +17,10 @@ esptool.py --chip esp32s3 write_flash --flash_mode dio --flash_size 16MB --flash
 
 ## MD5
 ```
-ed1e180cfcde8a2ba6c33f4e823f18ed  bootloader.bin
-e472945950ba069df9e78e766156bb6a  esp-miner.bin
-75df3b4f77afa18c34ef2d1fbabf5ed4  esp-miner-factory-NERDOCTAXEGAMMA-LAN.bin
+10ccf46b466729a6bf609d951af72c10  bootloader.bin
+3bebd2fc06459c1fbc79d02ddbaf7a32  esp-miner.bin
+4ac398b35ca19f34d9e5da264d932f91  esp-miner-factory-NERDOCTAXEGAMMA-LAN.bin
 84d04c9d6cc8ef35bf825d51a5277699  ota_data_initial.bin
 5564bf7cc6773a0af894079b83d28500  partition-table.bin
-54bda1b659ecfe7c0c5ada1adfa988ae  www.bin
+ecfc7424f9e066089c9973645927988a  www.bin
 ```
