@@ -1,15 +1,11 @@
-# فریمور LAN — نسخه 1.1.0 (auto-probe) — NerdOCTAXE-Gamma LGA_Design-Rev-2.2 + آداپتر BitRex
 
-Current Version: 1.1.0 — پایه shufps/ESP-Miner-NerdQAxePlus (762092d) — BOARD=NERDOCTAXEGAMMA
+Current Version: v1.1.0 — shufps/ESP-Miner-NerdQAxePlus (762092d) — BOARD=NERDOCTAXEGAMMA
 
-## جدید در این بیلد
-- **تشخیص خودکار سیم‌کشی**: هنگام بوت ۴ حالت (قطعیت RST × جابه‌جایی MOSI/MISO) امتحان و درست‌ترین انتخاب می‌شود؛ نتیجه هر امتحان در لاگ سریال ثبت می‌شود (`probe[...]: ver=0x..`)
-- رفع باگ ترتیب netif، غیرفعال‌سازی TMP451 MUX در حالت LAN، آیکون شبکه
 
-## پین‌ها (طراحی آداپتر — تأیید شد)
-SCLK=GPIO2 · RST=GPIO3 · MOSI=GPIO12 · MISO=GPIO16 · CS=GPIO21 — ماژول W5500 با هدر 2×5 (SCLK GND / SCS INT / MOSI RST / MISO GND / 3.3V 5V)، تغذیه 5V
+## pins
+SCLK=GPIO2 · RST=GPIO3 · MOSI=GPIO12 · MISO=GPIO16 · CS=GPIO21 — W5500  (SCLK GND / SCS INT / MOSI RST / MISO GND / 3.3V 5V)
 
-## فلش
+## FLASH
 ```bash
 esptool.py --chip esp32s3 write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m \
   0x0 esp-miner-factory-NERDOCTAXEGAMMA-LAN.bin
