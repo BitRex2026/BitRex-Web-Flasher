@@ -186,7 +186,7 @@
     ESP Web Tools · Web Serial
   </div>
   <h1>Flash your miner <span>straight from the browser</span></h1>
-  <p>Official ESP-Miner v1.1.0 base with BitRex and NerdOCTAXE-Gamma LAN board support.
+  <p>Official ESP-Miner v1.1.0.1 base with BitRex and NerdOCTAXE-Gamma LAN board support.
      No drivers, no installers — connect USB-C and click.</p>
   <div class="pills">
     <span class="pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Verified binaries (MD5-checked)</span>
@@ -211,19 +211,20 @@
 
     <!-- BitRex -->
     <div class="fw">
-      <span class="badge g">For BitRex board</span>
+      <span class="badge g">For BitRex board · v1.1.0.1</span>
       <h3>⛏ BitRex — 4× BM1373</h3>
-      <p class="desc">ESP-Miner v1.1.0 + BitRex board class + LAN-Adapter (W5500) support, always on. Falls back to WiFi automatically when no adapter is plugged in.</p>
+      <p class="desc">ESP-Miner v1.1.0.1 + BitRex board class + ThemeBitrex neon-green UI + calibrated TPS53647 (R1=66.5k) &amp; TMP1075 (U19 ASIC / U18 VRM) + LAN-Adapter (W5500) support.</p>
       <div class="specs">
         <span class="spec">Chip <b>ESP32-S3</b></span>
         <span class="spec">ASIC <b>4× BM1373</b></span>
-        <span class="spec">Build <b>2025-08-30</b></span>
-        <span class="spec">App <b>3.1 MB</b></span>
+        <span class="spec">Version <b>v1.1.0.1</b></span>
+        <span class="spec">Build <b>2026-10-11</b></span>
+        <span class="spec">App <b>3.3 MB</b></span>
       </div>
       <ul class="feats">
-        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Hashboard: TPS53647 (4-phase) + EMC2302 fans + 2× TMP1075</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Hashboard: TPS53647 (4-phase, Imax=90A) + EMC2302 fans + 2× TMP1075 (U19=0x49 ASIC, U18=0x48 VRM)</li>
         <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> BitRex LAN-Adapter (W5500) — ETH preferred, WiFi fallback</li>
-        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> AxeOS v2 API, solo-mining verification, mDNS discovery</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> ThemeBitrex (#11d51e) LCD &amp; AxeOS v2 UI, solo-mining verification, mDNS discovery</li>
       </ul>
       <div class="flash-zone">
         <div class="mode" id="modeBitrex" data-mode="update">
@@ -232,22 +233,32 @@
           <p class="mode-note" id="noteBitrex"></p>
         </div>
         <esp-web-install-button id="btnBitrexU" manifest="manifest-bitrex-update.json">
-          <button slot="activate">⬆&nbsp; Flash BitRex update</button>
+          <button slot="activate">⬆&nbsp; Flash BitRex v1.1.0.1 update</button>
         </esp-web-install-button>
         <esp-web-install-button id="btnBitrexF" manifest="manifest-bitrex-factory.json" style="display:none">
-          <button slot="activate" class="amber">🗑&nbsp; Flash BitRex factory</button>
+          <button slot="activate" class="amber">🗑&nbsp; Flash BitRex v1.1.0.1 factory</button>
         </esp-web-install-button>
         <div class="status" id="stBitrex">
           <div class="msg"><span class="dot"></span><span class="txt">Waiting…</span></div>
           <div class="bar"><i></i></div>
         </div>
         <details class="md5">
-          <summary>Binary checksums (MD5) — v1.1.0</summary>
-          <code>esp-miner.bin        3d344c47b2358e49fa34d97c95742872
-www.bin              6f85a6be71aa7eab22d1624b22e6f854
-bootloader.bin       e40aac0cb9665cf4e095731f7ce1b772
-partition-table.bin  5564bf7cc6773a0af894079b83d28500
-ota_data_initial.bin 84d04c9d6cc8ef35bf825d51a5277699</code>
+          <summary>Binary checksums (MD5 &amp; SHA256) — v1.1.0.1</summary>
+          <code># MD5
+esp-miner.bin                        c2872808f56e8482889c5264ce6b61f8
+www.bin                              3da7e9cf776ce643869bf2d1a3c35fea
+bootloader.bin                       6d81acf8a105a6d8a2fc838f85d48de7
+partition-table.bin                  5564bf7cc6773a0af894079b83d28500
+ota_data_initial.bin                 84d04c9d6cc8ef35bf825d51a5277699
+esp-miner-factory-BitRex-v1.1.0.1.bin 90902f7fd7cbeb7321133a1e12ba3e97
+
+# SHA256
+esp-miner.bin                        190d18d50bdafa918bb80a672cf6da04e2d4006cd9f1f9f06d8165294cb80013
+www.bin                              f3802dee920ab3413faacf38b62d49ec4abe798635e1919185bc5dcf7a3af0e6
+bootloader.bin                       4af3c368a62152a902cb020932a467351525e73ab8fc82280d63acbe279027c7
+partition-table.bin                  392125fd8d91d3fbf8f4b5dde20032f047492e2415c339b4bf222eaf14732dc3
+ota_data_initial.bin                 7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f
+esp-miner-factory-BitRex-v1.1.0.1.bin 2677b89ea6f51c38955c3df7392a94a263b60509d80f355706f48ab19675cc34</code>
         </details>
       </div>
     </div>
