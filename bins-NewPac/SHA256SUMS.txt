@@ -2,6 +2,6 @@
 392125fd8d91d3fbf8f4b5dde20032f047492e2415c339b4bf222eaf14732dc3  partition-table.bin
 7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f  ota_data_initial.bin
 f3802dee920ab3413faacf38b62d49ec4abe798635e1919185bc5dcf7a3af0e6  www.bin
-13db1eb2e33ee5b3bd04dffcbdd44319b8c189849b1ab5b5b5a530a5329ecba9  esp-miner.bin
-13db1eb2e33ee5b3bd04dffcbdd44319b8c189849b1ab5b5b5a530a5329ecba9  esp-miner-NewPac-v1.1.0.1.bin
-ce2291d6da52b83e101911d1e21c953fd468c5faaf7f7fc69a7ffbd897bfeffd  esp-miner-factory-NewPac-v1.1.0.1.bin
+8efb85e6c3f5a621ef23cd8573f465fb0c38f5a25bea790cf3d68cd783c41f26  esp-miner.bin
+8efb85e6c3f5a621ef23cd8573f465fb0c38f5a25bea790cf3d68cd783c41f26  esp-miner-NewPac-v1.1.0.1.bin
+22210984000d19f60caeb7cf7f9aced2c4458b55b54113af44449117874b83b1  esp-miner-factory-NewPac-v1.1.0.1.bin
