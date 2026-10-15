@@ -263,6 +263,60 @@ esp-miner-factory-BitRex-v1.1.0.1.bin ebed3982050926eb2627de4b16004eb9c4194a3ec7
       </div>
     </div>
 
+    <!-- NewPac USB -->
+    <div class="fw">
+      <span class="badge g">USB Host · T-Display-S3 · v1.1.0.1</span>
+      <h3>🔌 GekkoScience NewPac — 2× BM1387 (USB)</h3>
+      <p class="desc">ESP-Miner v1.1.0.1 + native ESP32-S3 USB Host FTDI FT231X driver + BM1387 protocol + USB 2.0 Hub support + T-Display-S3 LCD &amp; AxeOS v2 UI + LAN-Adapter (W5500) support.</p>
+      <div class="specs">
+        <span class="spec">Chip <b>ESP32-S3</b></span>
+        <span class="spec">ASIC <b>2× BM1387 (USB)</b></span>
+        <span class="spec">Version <b>v1.1.0.1</b></span>
+        <span class="spec">Build <b>2026-10-15</b></span>
+        <span class="spec">App <b>3.1 MB</b></span>
+      </div>
+      <ul class="feats">
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Direct USB OTG Host (GPIO19/20) to GekkoScience NewPac (FT231X 0403:6015) via powered USB 2.0 Hub</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> BitRex LAN-Adapter (W5500) auto-detect — ETH preferred, WiFi fallback</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Hot-plug detection, CBUS bitbang ASIC reset, 100–600 MHz PLL control, T-Display-S3 LCD &amp; AxeOS v2</li>
+      </ul>
+      <div class="flash-zone">
+        <div class="mode" id="modeNewpac" data-mode="update">
+          <button type="button" class="mode-btn on" data-mode="update">⬆ Update — keep settings</button>
+          <button type="button" class="mode-btn" data-mode="factory">🗑 Factory — full reset</button>
+          <p class="mode-note" id="noteNewpac"></p>
+        </div>
+        <esp-web-install-button id="btnNewpacU" manifest="manifest-newpac-update.json">
+          <button slot="activate">⬆&nbsp; Flash NewPac-USB v1.1.0.1 update</button>
+        </esp-web-install-button>
+        <esp-web-install-button id="btnNewpacF" manifest="manifest-newpac-factory.json" style="display:none">
+          <button slot="activate" class="amber">🗑&nbsp; Flash NewPac-USB v1.1.0.1 factory</button>
+        </esp-web-install-button>
+        <div class="status" id="stNewpac">
+          <div class="msg"><span class="dot"></span><span class="txt">Waiting…</span></div>
+          <div class="bar"><i></i></div>
+        </div>
+        <details class="md5">
+          <summary>Binary checksums (MD5 &amp; SHA256) — v1.1.0.1</summary>
+          <code># MD5
+esp-miner.bin                        dadf32cb8428fe0f1233f592d0078346
+www.bin                              3da7e9cf776ce643869bf2d1a3c35fea
+bootloader.bin                       f4fd0fb03777f435dd93013c1438bc39
+partition-table.bin                  5564bf7cc6773a0af894079b83d28500
+ota_data_initial.bin                 84d04c9d6cc8ef35bf825d51a5277699
+esp-miner-factory-NewPac-v1.1.0.1.bin 201db07aad6931c315be90dcc2f6c5d2
+
+# SHA256
+esp-miner.bin                        e6d31e408fa3d3d7f6135cdfa710b733c29c800487ac2533c6894db4e32d3496
+www.bin                              f3802dee920ab3413faacf38b62d49ec4abe798635e1919185bc5dcf7a3af0e6
+bootloader.bin                       6019d12bab8fb6a84a6af52aca044af40adcb78f97005053ef6bfac6d9576b2c
+partition-table.bin                  392125fd8d91d3fbf8f4b5dde20032f047492e2415c339b4bf222eaf14732dc3
+ota_data_initial.bin                 7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f
+esp-miner-factory-NewPac-v1.1.0.1.bin c8352ed03eb649fa1d1738dbc7ccb1259011175f3552cc764dc7d10c9e6b1daa</code>
+        </details>
+      </div>
+    </div>
+
     <!-- Gamma -->
     <div class="fw">
       <span class="badge a">Gamma · LGA rev2.2 only</span>
@@ -427,6 +481,13 @@ setupMode({
   updateBtnId:'btnBitrexU', factoryBtnId:'btnBitrexF',
   noteUpdate:noteUpdateBitrex, noteFactory:noteFactoryBitrex,
   okMsg:'✔ Done! The board is rebooting — it will appear on your network in ~30 s.'
+});
+
+setupMode({
+  modeId:'modeNewpac', noteId:'noteNewpac', stId:'stNewpac',
+  updateBtnId:'btnNewpacU', factoryBtnId:'btnNewpacF',
+  noteUpdate:noteUpdateBitrex, noteFactory:noteFactoryBitrex,
+  okMsg:'✔ Done! Rebooting — connect GekkoScience NewPac via OTG + powered USB 2.0 hub.'
 });
 
 setupMode({

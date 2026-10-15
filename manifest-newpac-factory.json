@@ -1,0 +1,17 @@
+{
+  "name": "GekkoScience NewPac (2x BM1387 USB) — Factory",
+  "version": "v1.1.0.1",
+  "new_install_prompt_erase": false,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "bins-NewPac/bootloader.bin", "offset": 0 },
+        { "path": "bins-NewPac/partition-table.bin", "offset": 32768 },
+        { "path": "bins-NewPac/esp-miner.bin", "offset": 65536 },
+        { "path": "bins-NewPac/www.bin", "offset": 4259840 },
+        { "path": "bins-NewPac/ota_data_initial.bin", "offset": 15794176 }
+      ]
+    }
+  ]
+}
