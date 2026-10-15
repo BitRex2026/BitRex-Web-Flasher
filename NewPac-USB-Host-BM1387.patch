@@ -53,7 +53,7 @@ index 53ce0722..dd50b039 100644
      const char *getMiningAgent();
      int getVersion();
 diff --git a/main/boards/newpac.cpp b/main/boards/newpac.cpp
-index c01977ee..ac738eb4 100644
+index c01977ee..d08d9e08 100644
 --- a/main/boards/newpac.cpp
 +++ b/main/boards/newpac.cpp
 @@ -1,3 +1,4 @@
@@ -61,7 +61,15 @@ index c01977ee..ac738eb4 100644
  #include "board.h"
  #include "newpac.h"
  #include "ftdi_usb.h"
-@@ -44,17 +45,17 @@ NewPacBoard::NewPacBoard() : Board()
+@@ -38,23 +39,24 @@ NewPacBoard::NewPacBoard() : Board()
+     m_asicMinDifficulty         = 1;
+     m_asicMinDifficultyDualPool = 1;
+ 
+-    m_theme          = new ThemeGeneric();
++    m_theme          = new ThemeBitrex();
++    m_swarmColorName = "#11d51e";
+     m_hasHashCounter = true;
+ 
      m_asicJobIntervalMs = 1500;
  
      // GekkoScience NewPac (2x BM1387): 100..600 MHz (22.8..136.8 GH/s), default 200 MHz (45.6 GH/s)
@@ -89,7 +97,7 @@ index c01977ee..ac738eb4 100644
  
      m_fanInvertPolarity = false;
      m_fanPerc           = 100;
-@@ -79,7 +80,7 @@ NewPacBoard::NewPacBoard() : Board()
+@@ -79,7 +81,7 @@ NewPacBoard::NewPacBoard() : Board()
      m_swarmColorName = "#00e676"; // green
  
      m_asics = new BM1387();
@@ -98,7 +106,7 @@ index c01977ee..ac738eb4 100644
  
      // Bring W5500 RST (GPIO3) out of reset before probing LAN-Adapter
      gpio_config_t rst_io = {};
-@@ -94,27 +95,64 @@ NewPacBoard::NewPacBoard() : Board()
+@@ -94,27 +96,64 @@ NewPacBoard::NewPacBoard() : Board()
  
      m_hasEth = isEthConnected();
      if (!m_hasEth) {
@@ -173,7 +181,7 @@ index c01977ee..ac738eb4 100644
      return true;
  }
  
-@@ -124,11 +162,14 @@ bool NewPacBoard::initAsics()
+@@ -124,11 +163,14 @@ bool NewPacBoard::initAsics()
          return false;
      }
  
@@ -189,7 +197,7 @@ index c01977ee..ac738eb4 100644
  
      // Keep m_isInitialized and m_isBuckInitialized true so USB hot-plug works seamlessly
      m_isInitialized     = true;
-@@ -167,13 +208,7 @@ void NewPacBoard::setFanPolarity(bool invert)
+@@ -167,13 +209,7 @@ void NewPacBoard::setFanPolarity(bool invert)
  float NewPacBoard::getTemperature(int index)
  {
      (void)index;
@@ -204,7 +212,7 @@ index c01977ee..ac738eb4 100644
  }
  
  float NewPacBoard::getVRTemp()
-@@ -229,7 +264,6 @@ float NewPacBoard::getIout()
+@@ -229,7 +265,6 @@ float NewPacBoard::getIout()
  
  void NewPacBoard::requestBuckTelemtry()
  {
@@ -235,6 +243,60 @@ index ce496963..a9f506cb 100644
      virtual bool initBoard() override;
      virtual bool initAsics() override;
  
+diff --git a/main/displays/images/themes/themes.c b/main/displays/images/themes/themes.c
+index 5fe9d28b..f7bea3d1 100644
+--- a/main/displays/images/themes/themes.c
++++ b/main/displays/images/themes/themes.c
+@@ -90,3 +90,11 @@
+ #include "./NerdHaxeGamma/ui_img_splashscreen2_png.c"
+ #include "./NerdHaxeGamma/ui_img_globalStats_png.c"
+ 
++#include "./BitRex/ui_img_initscreen2_png.c"
++#include "./BitRex/ui_img_miningscreen2_png.c"
++#include "./BitRex/ui_img_portalscreen_png.c"
++#include "./BitRex/ui_img_btcscreen_png.c"
++#include "./BitRex/ui_img_settingsscreen_png.c"
++#include "./BitRex/ui_img_splashscreen2_png.c"
++#include "./BitRex/ui_img_globalStats_png.c"
++
+diff --git a/main/displays/images/themes/themes.h b/main/displays/images/themes/themes.h
+index b7260281..cb73801e 100644
+--- a/main/displays/images/themes/themes.h
++++ b/main/displays/images/themes/themes.h
+@@ -161,6 +161,15 @@ LV_IMG_DECLARE(ui_img_NerdHaxeGamma_settingsscreen_png);
+ LV_IMG_DECLARE(ui_img_NerdHaxeGamma_splashscreen2_png);
+ LV_IMG_DECLARE(ui_img_NerdHaxeGamma_globalStats_png);
+ 
++// image files for theme BitRex
++LV_IMG_DECLARE(ui_img_BitRex_initscreen2_png);
++LV_IMG_DECLARE(ui_img_BitRex_miningscreen2_png);
++LV_IMG_DECLARE(ui_img_BitRex_portalscreen_png);
++LV_IMG_DECLARE(ui_img_BitRex_btcscreen_png);
++LV_IMG_DECLARE(ui_img_BitRex_settingsscreen_png);
++LV_IMG_DECLARE(ui_img_BitRex_splashscreen2_png);
++LV_IMG_DECLARE(ui_img_BitRex_globalStats_png);
++
+ 
+ // class  for theme NerdOctaxeGamma
+ class ThemeNerdoctaxegamma : public Theme {
+@@ -316,3 +325,17 @@ public:
+     }
+ };
+ 
++// class  for theme BitRex
++class ThemeBitrex : public Theme {
++public:
++    ThemeBitrex() {
++        setInitscreen2(&ui_img_BitRex_initscreen2_png);
++        setMiningscreen2(&ui_img_BitRex_miningscreen2_png);
++        setPortalscreen(&ui_img_BitRex_portalscreen_png);
++        setBtcscreen(&ui_img_BitRex_btcscreen_png);
++        setSettingsscreen(&ui_img_BitRex_settingsscreen_png);
++        setSplashscreen2(&ui_img_BitRex_splashscreen2_png);
++        setGlobalstats(&ui_img_BitRex_globalStats_png);
++    }
++};
++
 diff --git a/main/http_server/handler_file.cpp b/main/http_server/handler_file.cpp
 index 42182e79..fd8484fd 100644
 --- a/main/http_server/handler_file.cpp
