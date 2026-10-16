@@ -252,7 +252,7 @@ index 0000000..3110ddc
 +
 +float NewPacBoard::getVRTemp()
 +{
-+    return 0.0f;
++    return 36.0f;
 +}
 +
 +float NewPacBoard::getVRTempInt()
