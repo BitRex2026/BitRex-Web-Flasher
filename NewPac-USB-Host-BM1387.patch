@@ -128,7 +128,7 @@ index 0000000..3110ddc
 +
 +    // Enable W5500 auto-probe in NETWORK.earlyEthSpiInit(); if no LAN-Adapter
 +    // is attached, W5500::earlySpiInit() releases all SPI/RST GPIOs cleanly.
-+    m_hasEth = true;
++    m_hasEth = false;
 +}
 +
 +void NewPacBoard::loadSettings()
