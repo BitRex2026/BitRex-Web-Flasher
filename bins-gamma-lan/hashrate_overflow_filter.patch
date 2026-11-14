@@ -1,18 +1,21 @@
 diff --git a/main/tasks/hashrate_monitor_task.cpp b/main/tasks/hashrate_monitor_task.cpp
-index 738596c..e94012b 100644
 --- a/main/tasks/hashrate_monitor_task.cpp
 +++ b/main/tasks/hashrate_monitor_task.cpp
-@@ -141,6 +141,13 @@ void HashrateMonitor::onRegisterReply(uint8_t asic_idx, uint32_t counterNow)
-     int64_t timeDelta = now - m_prevResponse[asic_idx];
-     uint32_t counterDelta = counterNow - m_prevCounter[asic_idx];
- 
-+    // Filter out 32-bit counter underflow / corrupt packet anomalies (e.g. 28M GH/s spikes)
-+    if (counterNow < m_prevCounter[asic_idx] || counterDelta >= 4096) {
-+        m_prevCounter[asic_idx] = counterNow;
-+        m_prevResponse[asic_idx] = now;
-+        return;
+@@ -49,6 +49,9 @@ float HashrateMonitor::getChipHashrate(int nr) {
+     if (nr < 0 || nr >= m_asicCount) {
+         return 0.0f;
+     }
++    if (m_chipHashrate[nr] > 2048.0f) {
++        return 0.0f;
 +    }
-+
-     double chip_ghs = (double) counterDelta * (double) 0x100000000uLL / (double) timeDelta / 1000.0;
+     return m_chipHashrate[nr];
+ }
  
-     setChipHashrate(asic_idx, chip_ghs);
+@@ -70,7 +73,7 @@ float HashrateMonitor::getTotalChipHashrate() {
+     float total = 0.0f;
+     for (int i=0;i < m_asicCount; i++) {
+-        total += m_chipHashrate[i];
++        total += getChipHashrate(i);
+     }
+     return total;
+ }
