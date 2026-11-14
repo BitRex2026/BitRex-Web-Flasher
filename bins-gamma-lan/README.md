@@ -1,26 +1,24 @@
-Current Version: v1.1.0-patched — shufps/ESP-Miner-NerdQAxePlus (762092d) — BOARD=NERDOCTAXEGAMMA + LAN (W5500)
+# NerdOCTAXE-Gamma LGA rev2.2 + LAN — Fixed Hashrate Overflow Build
 
-## Patches & Fixes
-- **LAN-Adapter (W5500)**: SCLK=GPIO2, RST=GPIO3, MOSI=GPIO12, MISO=GPIO16, CS=GPIO21 (Polling mode).
-- **VR Regulator**: Forced TPS53647 (GPIO3 reserved for LAN RST, skipping VR_DETECT).
-- **Hashrate Monitor Glitch Fix**: Patched 32-bit counter underflow and anomalous register read spikes (`delta >= 4096` / `counterNow < prevCounter`). Prevents astronomical multi-million GH/s display errors (28M+ GH/s) and protects 1m/10m/1h history moving averages.
+Target board: `NERDOCTAXEGAMMA` (NerdOCTAXE-Gamma LGA rev2.2, 4x BM1370)  
+Commit base: `762092d` (v1.1.0) with custom W5500 SPI Ethernet pins:
+- SCK: GPIO 12
+- MOSI: GPIO 21
+- MISO: GPIO 16
+- CS: GPIO 3
+- INT: GPIO 2
 
-## pins
-SCLK=GPIO2 · RST=GPIO3 · MOSI=GPIO12 · MISO=GPIO16 · CS=GPIO21 — W5500 (SCLK GND / SCS INT / MOSI RST / MISO GND / 3.3V 5V)
+## Fix Applied:
+- **Assembly filter in `HashrateMonitor::onRegisterReply` (`0x4202ce48`)**: filters out anomalous / overflow counter delta readings (`counterDelta > 4095`) from Chip 0 / register 0x90.
+- **Log visual identifier**: outputs `hashrate_monitor: chip [PATCHED]: ...` so you can verify immediately in the serial / web log that the patched binary is running.
 
-## FLASH
-```bash
-esptool.py --chip esp32s3 write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m \
-  0x0 esp-miner-factory-NERDOCTAXEGAMMA-LAN.bin
+## Binary Checksums (MD5):
 ```
-
-## MD5
-```
+f4f394f03b12f331380c3aaec41cdd38  esp-miner.bin
+0e28358f0eb5e1b0bfec2cbfc80110d6  esp-miner-factory-NERDOCTAXEGAMMA-LAN.bin
+53a543f3ca26e81f4af31984141da818  esp-miner-update-NERDOCTAXEGAMMA-LAN.hex
 e52478d24c902990d9218b704752677a  bootloader.bin
-f6f17f69030c49edf58989645cdb9977  esp-miner.bin
-143bac4f917aa7c2b95a8531bce039c2  esp-miner-factory-NERDOCTAXEGAMMA-LAN.bin
-b870e3f1774fd487230055e02050ce21  esp-miner-update-NERDOCTAXEGAMMA-LAN.hex
-84d04c9d6cc8ef35bf825d51a5277699  ota_data_initial.bin
 5564bf7cc6773a0af894079b83d28500  partition-table.bin
+84d04c9d6cc8ef35bf825d51a5277699  ota_data_initial.bin
 0a30ad94003b56a23de8f0395107649c  www.bin
 ```
