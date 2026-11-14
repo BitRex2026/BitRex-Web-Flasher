@@ -1,21 +1,16 @@
 diff --git a/main/tasks/hashrate_monitor_task.cpp b/main/tasks/hashrate_monitor_task.cpp
 --- a/main/tasks/hashrate_monitor_task.cpp
 +++ b/main/tasks/hashrate_monitor_task.cpp
-@@ -49,6 +49,9 @@ float HashrateMonitor::getChipHashrate(int nr) {
-     if (nr < 0 || nr >= m_asicCount) {
-         return 0.0f;
-     }
-+    if (m_chipHashrate[nr] > 2048.0f) {
-+        return 0.0f;
-+    }
-     return m_chipHashrate[nr];
- }
+@@ -105,7 +105,12 @@ void HashrateMonitor::onRegisterReply(int asic_idx, uint32_t counterNow, uint64_t now) {
+     double chip_ghs = (double)(counterNow - m_prevCounter[asic_idx]) * 4294967296.0 / (double)(now - m_prevResponse[asic_idx]) / 1000.0;
  
-@@ -70,7 +73,7 @@ float HashrateMonitor::getTotalChipHashrate() {
-     float total = 0.0f;
-     for (int i=0;i < m_asicCount; i++) {
--        total += m_chipHashrate[i];
-+        total += getChipHashrate(i);
-     }
-     return total;
+-    setChipHashrate(asic_idx, (float)chip_ghs);
++    // Sample-and-Hold Outlier Rejection Filter:
++    // Prevents phantom 45M-50M GH/s spikes caused by microsecond delta replies or counter glitches.
++    // Valid chip hashrate (0 to 2048 GH/s) is stored cleanly. Outlier packets are dropped, holding 0.00 GH/s.
++    if (chip_ghs >= 0.0f && chip_ghs < 2048.0f) {
++        m_chipHashrate[asic_idx] = (float)chip_ghs;
++    }
+     m_prevCounter[asic_idx] = counterNow;
+     m_prevResponse[asic_idx] = now;
  }
